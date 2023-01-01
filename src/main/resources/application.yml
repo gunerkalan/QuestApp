@@ -1,0 +1,21 @@
+server:
+  port: 8094
+
+spring:
+  main:
+    allow-circular-references: true
+  application:
+    name: quessapp
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/quess
+    username: postgres
+    password: 26283501
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
