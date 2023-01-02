@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "comments")
 @Getter
@@ -31,5 +33,8 @@ public class Comment {
     @Lob
     @Column(name = "text", columnDefinition = "text")
     private String text;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    Date createDate;
 
 }
