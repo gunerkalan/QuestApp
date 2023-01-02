@@ -20,9 +20,9 @@ import java.util.stream.Collectors;
 @Service
 public class PostService {
 
-    private PostRepository postRepository;
+    private final PostRepository postRepository;
     private LikeService likeService;
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public PostService(PostRepository postRepository, UserRepository userRepository) {
         this.postRepository = postRepository;
