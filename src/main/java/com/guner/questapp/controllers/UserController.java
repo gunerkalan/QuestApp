@@ -3,6 +3,7 @@ package com.guner.questapp.controllers;
 import com.guner.questapp.Response.UserResponse;
 import com.guner.questapp.entities.User;
 import com.guner.questapp.exceptions.UserNotFoundException;
+import com.guner.questapp.requests.UserDto;
 import com.guner.questapp.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("api/users")
 public class UserController {
 
     private final UserService userService;
@@ -26,8 +27,8 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> createUser(@RequestBody User newUser){
-        User user = userService.saveOneUser(newUser);
+    public ResponseEntity<Void> createUser(@RequestBody UserDto userDto){
+        UserDto user = userService.saveOneUser(userDto);
         if(user!=null)
             return new ResponseEntity<>(HttpStatus.CREATED);
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

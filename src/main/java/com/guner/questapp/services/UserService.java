@@ -6,6 +6,8 @@ import com.guner.questapp.repositories.CommentRepository;
 import com.guner.questapp.repositories.LikeRepository;
 import com.guner.questapp.repositories.PostRepository;
 import com.guner.questapp.repositories.UserRepository;
+import com.guner.questapp.requests.UserDto;
+import com.guner.questapp.services.mapper.UserMapper;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -20,12 +22,14 @@ public class UserService {
     private final PostRepository postRepository;
     private final CommentRepository commentRepository;
     private final LikeRepository likeRepository;
+    private final UserMapper userMapper;
 
-    public UserService(UserRepository userRepository, PostRepository postRepository, CommentRepository commentRepository, LikeRepository likeRepository) {
+    public UserService(UserRepository userRepository, PostRepository postRepository, CommentRepository commentRepository, LikeRepository likeRepository, UserMapper userMapper) {
         this.userRepository = userRepository;
         this.postRepository = postRepository;
         this.commentRepository = commentRepository;
         this.likeRepository = likeRepository;
+        this.userMapper = userMapper;
     }
 
 
@@ -33,8 +37,11 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User saveOneUser(User user){
-        return userRepository.save(user);
+    public UserDto saveOneUser(UserDto userDto){
+        User user = userMapper.dtoToEntity(userDto);
+        user = userRepository.save(user);
+        userDto.setId(user.getId());
+        return userDto;
     }
 
     public User getOneUserById(Long userId){

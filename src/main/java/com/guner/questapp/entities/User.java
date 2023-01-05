@@ -1,6 +1,7 @@
 package com.guner.questapp.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,6 +19,8 @@ import java.util.Set;
 public class User {
 
     @Id
+    @SequenceGenerator(name="seq_user",allocationSize = 1)
+    @GeneratedValue(generator = "seq_user",strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Column(name = "uname")
