@@ -48,15 +48,16 @@ public class UserService {
         return userRepository.findById(userId).orElse(null);
     }
 
-    public User updateOneUser(Long userId, User user){
+    public UserDto updateOneUser(Long userId, UserDto userDto){
         Optional<User> userDb = userRepository.findById(userId);
         if(userDb.isPresent()){
             User foundUser= userDb.get();
-            foundUser.setUserName(user.getUserName());
-            foundUser.setPassword(user.getPassword());
-            foundUser.setAvatar(user.getAvatar());
-            userRepository.save(foundUser);
-            return foundUser;
+            foundUser.setUserName(userDto.getUserName());
+            foundUser.setPassword(userDto.getPassword());
+            foundUser.setAvatar(userDto.getAvatar());
+            foundUser = userRepository.save(foundUser);
+            userDto.setId(foundUser.getId());
+            return userDto;
         }else
             return null;
     }

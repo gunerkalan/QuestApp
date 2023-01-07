@@ -44,9 +44,9 @@ public class UserController {
     }
 
     @PutMapping("/{userId}")
-    public ResponseEntity<Void> updateOneUser(@PathVariable Long userId, @RequestBody User newUser){
-        User user = userService.updateOneUser(userId,newUser);
-        if(user!=null)
+    public ResponseEntity<Void> updateOneUser(@PathVariable Long userId, @RequestBody UserDto userDto){
+        UserDto userDtoResult = userService.updateOneUser(userId,userDto);
+        if(userDtoResult!=null)
             return new ResponseEntity<>(HttpStatus.OK);
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }

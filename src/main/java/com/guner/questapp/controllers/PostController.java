@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/posts")
+@RequestMapping("api/posts")
 public class PostController {
 
     private final PostService postService;
@@ -40,7 +40,7 @@ public class PostController {
         return postService.updateOnePostById(postId,updatePost);
     }
 
-    @DeleteMapping("/postId")
+    @DeleteMapping("/{postId}")
     public void deleteOnePost(@PathVariable Long postId){
         postService.deleteOnePostById(postId);
     }

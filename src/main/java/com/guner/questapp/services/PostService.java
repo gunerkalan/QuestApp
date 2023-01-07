@@ -11,6 +11,7 @@ import com.guner.questapp.requests.PostCreateRequest;
 import com.guner.questapp.requests.PostUpdateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -34,6 +35,7 @@ public class PostService {
         this.likeService = likeService;
     }
 
+    @Transactional
     public List<PostResponse> getAllPosts(Optional<Long> userId){
         List<Post> list;
         if(userId.isPresent()) {
@@ -62,7 +64,6 @@ public class PostService {
         if(user.isEmpty())
             return null;
         Post toSave = new Post();
-        //toSave.setId(newPostRequest.getId());
         toSave.setText(newPostRequest.getText());
         toSave.setTitle(newPostRequest.getTitle());
         toSave.setUser(user.get());
