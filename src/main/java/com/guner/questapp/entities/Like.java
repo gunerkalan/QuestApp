@@ -1,5 +1,6 @@
 package com.guner.questapp.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -26,11 +27,13 @@ public class Like {
     @ManyToOne(optional=true, fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonManagedReference
+    @JsonIgnore
     private User user;
 
     @JoinColumn(name="post_id", nullable = false, referencedColumnName = "id")
     @ManyToOne(optional=true, fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonManagedReference
+    @JsonIgnore
     private Post post;
 }

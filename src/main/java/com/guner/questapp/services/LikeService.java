@@ -9,6 +9,7 @@ import com.guner.questapp.repositories.PostRepository;
 import com.guner.questapp.repositories.UserRepository;
 import com.guner.questapp.requests.LikeCreateRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,6 +29,7 @@ public class LikeService {
         this.postRepository = postRepository;
     }
 
+    @Transactional
     public List<LikeResponse> getAllLikesWithParam(Optional<Long> userId, Optional<Long> postId) {
         List<Like> list;
         if(userId.isPresent() && postId.isPresent()) {

@@ -10,6 +10,7 @@ import com.guner.questapp.repositories.UserRepository;
 import com.guner.questapp.requests.CommentCreateRequest;
 import com.guner.questapp.requests.CommentUpdateRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -29,8 +30,8 @@ public class CommentService {
         this.postRepository = postRepository;
     }
 
+    @Transactional
     public List<CommentResponse> getAllCommentsWithParam(Optional<Long> userId, Optional<Long> postId){
-
         List<Comment> comments;
         if(userId.isPresent() && postId.isPresent()){
             comments= commentRepository.findByUserIdAndPostId(userId.get(), postId.get());
@@ -53,7 +54,6 @@ public class CommentService {
         Optional<Post> post = postRepository.findById(request.getPostId());
         if(user.isPresent() && post.isPresent()){
             Comment commentToSave = new Comment();
-            commentToSave.setId(request.getId());
             commentToSave.setPost(post.get());
             commentToSave.setUser(user.get());
             commentToSave.setText(request.getText());

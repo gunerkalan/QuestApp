@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/comments")
+@RequestMapping("api/comments")
 public class CommentController {
 
     private final CommentService commentService;
